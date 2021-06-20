@@ -266,3 +266,4 @@ directive:
     from: maps-management.json
     reason: standard property being applied to all azure resources.
 ```
+ 
