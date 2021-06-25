@@ -15,5 +15,9 @@ find specification/maps/data-plane/*/* -name "readme.md" -print | while read REA
   COMMAND="autorest $PARAMS $README_PATH --go-sdk-folder=$SDK_PATH"
 
   echo $COMMAND
-  eval $COMMAND
+  eval $COMMAND  
 done
+
+# hotfix
+find $SDK_PATH/services/preview/maps/ -name '*.go' -exec sed -i -e 's/DefaultGeography\s=\sus/DefaultGeography = Us/g' {} \;
+find $SDK_PATH/services/preview/maps/ -name '*.go' -exec sed -i -e 's/geographicResourceLocation/GeographicResourceLocation/g' {} \;  
