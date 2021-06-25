@@ -8,7 +8,7 @@
     "hostTemplate": "{geography}.atlas.microsoft.com",
     "parameters": [
       {
-        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
+        "$ref": "#/parameters/GeographicResourceLocation"
       }
     ]
   },
@@ -64,11 +64,6 @@
         },
         "created": {
           "description": "The created timestamp.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resourceLocation": {
-          "description": "The location URI for details about the created resource. This is only provided when the request was successfully completed.",
           "type": "string",
           "readOnly": true
         },
@@ -640,9 +635,6 @@
           "description": "New URL to check for the results of the long running process."
         }
       }
-    },
-    "202Batch": {
-      "description": "Batch request was accepted but is still being processed. Please try again in some time."
     },
     "202AsyncV2": {
       "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Operation-Location Header to obtain status.",

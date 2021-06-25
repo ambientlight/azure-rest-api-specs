@@ -1,14 +1,14 @@
-# Azure Maps
+# Azure Timezone
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Maps Timezone Client
+This is the AutoRest configuration file for Timezone Client
 
 ---
 
 ## Getting Started
 
-To build the SDK for Maps, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Timezone, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,12 +22,13 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for Maps Timezone Client.
+These are the global settings for Timezone Client.
 
 ``` yaml
-title: MapsTimezoneClient
+title: TimezoneClient
 openapi-type: data-plane
 tag: 1.0-preview
+# at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: https://atlas.microsoft.com/.default
@@ -64,12 +65,17 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
+
   #track1 doesn't support data-plane for go
   #manually generate for now with track2
   #- repo: azure-sdk-for-go
+
   #track1 doesn't support features needed for typescript
   #manually generate for now with track2
   #- repo: azure-sdk-for-js
+
+  #should be azure-sdk-for-net-track2, but SDK has not yet onboarded
+  #manually generate for now with track2
   - repo: azure-sdk-for-net
 ```
 ## Python
