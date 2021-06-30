@@ -11,13 +11,13 @@ fi
 # VERSION_MESSAGE="Initial preview"
 
 find specification/maps/data-plane/*/* -name "readme.md" -print | while read README_PATH ; do 
-  PARAMS=$(jq -s '.[0].autorestArguments | del(.[3]) | join(" ")' --raw-output $SDK_PATH/generate_options.json)
-  COMMAND="autorest $PARAMS $README_PATH --go-sdk-folder=$SDK_PATH"
+  #PARAMS=$(jq -s '.[0].autorestArguments | del(.[3]) | join(" ")' --raw-output $SDK_PATH/generate_options.json)
+  COMMAND="autorest --go --track2 --use=@autorest/go@4.0.0-preview.22 $README_PATH --go-sdk-folder=$SDK_PATH --multiapi"
 
   echo $COMMAND
   eval $COMMAND  
 done
 
 # hotfix
-find $SDK_PATH/services/preview/maps/ -name '*.go' -exec sed -i -e 's/DefaultGeography\s=\sus/DefaultGeography = Us/g' {} \;
-find $SDK_PATH/services/preview/maps/ -name '*.go' -exec sed -i -e 's/geographicResourceLocation/GeographicResourceLocation/g' {} \;  
+# find $SDK_PATH/services/preview/maps/ -name '*.go' -exec sed -i -e 's/DefaultGeography\s=\sus/DefaultGeography = Us/g' {} \;
+# find $SDK_PATH/services/preview/maps/ -name '*.go' -exec sed -i -e 's/geographicResourceLocation/GeographicResourceLocation/g' {} \;  
