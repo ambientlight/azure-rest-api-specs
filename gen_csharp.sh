@@ -41,9 +41,6 @@ find specification/maps/data-plane/*/* -name "readme.md" -print | while read REA
   sed -z "s/<ItemGroup>\n\s*<Compile/<ItemGroup>\n    <Compile Include=\"\$(AzureCoreSharedSources)Argument.cs\" Link=\"Shared\%(RecursiveDir)\%(Filename)%(Extension)\" \/>\n    <Compile Include=\"\$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs\" Link=\"Shared\%(RecursiveDir)\%(Filename)%(Extension)\" \/>\n    <Compile/" ../azure-sdk-for-net/sdk/maps/$SERVICE_NAME/src/$SERVICE_NAME.csproj > ../azure-sdk-for-net/sdk/maps/$SERVICE_NAME/src/$SERVICE_NAME.tmp.csproj
   mv ../azure-sdk-for-net/sdk/maps/$SERVICE_NAME/src/$SERVICE_NAME.tmp.csproj ../azure-sdk-for-net/sdk/maps/$SERVICE_NAME/src/$SERVICE_NAME.csproj
 
-  # <Compile Include="$(AzureCoreSharedSources)Argument.cs" Link="Shared\%(RecursiveDir)\%(Filename)%(Extension)" />
-  # <Compile Include="$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs" Link="Shared\%(RecursiveDir)\%(Filename)%(Extension)" />
-
   # the build somehow add condiitional dependencies if autorest.md is present, otherwise I cannot explain build failing without empty autorest.md...
   touch ../azure-sdk-for-net/sdk/maps/$SERVICE_NAME/src/autorest.md
 
