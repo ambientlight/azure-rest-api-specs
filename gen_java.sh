@@ -18,6 +18,9 @@ SPOTBUGS_EXCLUDE='<?xml version="1.0" encoding="UTF-8"?>
   <Match>
     <Bug pattern="SIC_INNER_SHOULD_BE_STATIC_ANON"/>
   </Match>
+  <Match>
+    <Bug pattern="NM_CONFUSING"/>
+  </Match>
 </FindBugsFilter>
 '
 
@@ -32,7 +35,7 @@ find specification/maps/data-plane/*/* -name "readme.md" -print | while read REA
   README_FPATH=$(dirname $README_PATH)
   SERVICE_NAME=$(cat $README_FPATH/readme.java.md | grep '^\s*output-folder:' | sed "s/output-folder://" | xargs basename)
   TARGET_PATH="$SDK_PATH/sdk/maps/$SERVICE_NAME"
-
+  SERVICE_COMPONENENTS=(${SERVICE_NAME//-/ })
   echo $TRACK2_COMMAND
   eval $TRACK2_COMMAND
 
@@ -40,7 +43,7 @@ find specification/maps/data-plane/*/* -name "readme.md" -print | while read REA
 
   # replace meta
   sed -i "s/<groupId>com.azure.resourcemanager<\/groupId>/<groupId>com.azure<\/groupId>/" $TARGET_PATH/pom.xml
-  sed -i "s/<artifactId>azure-resourcemanager-alias-generated<\/artifactId>/<artifactId>${SERVICE_NAME,,}<\/artifactId>/" $TARGET_PATH/pom.xml
+  sed -i "s/<artifactId>azure-resourcemanager-${SERVICE_COMPONENENTS[2]}-generated<\/artifactId>/<artifactId>${SERVICE_NAME,,}<\/artifactId>/" $TARGET_PATH/pom.xml
   sed -i '0,/<name>.*<\/name>/ '"s/<name>.*<\/name>/<name>Microsoft Azure client library for $SERVICE_NAME service<\/name>/" $TARGET_PATH/pom.xml
   sed -i '0,/<name>.*<\/name>/ '"s/<description>.*<\/description>/<description>This package contains the Microsoft $SERVICE_NAME SDK\.<\/description>>/" $TARGET_PATH/pom.xml
 
