@@ -12,7 +12,7 @@ fi
 
 find specification/maps/data-plane/*/* -name "readme.md" -print | while read README_PATH ; do 
   #PARAMS=$(jq -s '.[0].autorestArguments | del(.[3]) | join(" ")' --raw-output $SDK_PATH/generate_options.json)
-  COMMAND="autorest --go --track2 --use=@autorest/go@4.0.0-preview.22 $README_PATH --go-sdk-folder=$SDK_PATH --multiapi"
+  COMMAND="autorest --go --track2 --use=@autorest/go@4.0.0-preview.22 $README_PATH --go-sdk-folder=$SDK_PATH --multiapi --export-clients"
 
   echo $COMMAND
   eval $COMMAND  
