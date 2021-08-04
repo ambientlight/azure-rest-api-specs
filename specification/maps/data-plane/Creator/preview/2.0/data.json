@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Maps Data Service",
+    "title": "Azure Data Service",
     "version": "2.0",
     "description": "APIs for uploading map data to Azure Maps."
   },

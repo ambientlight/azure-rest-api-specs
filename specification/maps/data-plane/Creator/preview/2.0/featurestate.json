@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Maps Feature State Service",
+    "title": "Azure Feature State Service",
     "version": "2.0",
     "description": "APIs for managing the dynamic feature states in Azure Maps."
   },

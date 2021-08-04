@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Maps Spatial Service",
+    "title": "Azure Spatial Service",
     "version": "1.0",
     "description": "Azure Maps Spatial REST APIs"
   },

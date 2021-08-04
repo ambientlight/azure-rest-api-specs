@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Maps Tileset Service",
+    "title": "Azure Tileset Service",
     "version": "2.0",
     "description": "APIs for managing Tilesets."
   },
