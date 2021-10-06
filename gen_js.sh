@@ -17,9 +17,9 @@ find specification/maps/data-plane/*/* -name "readme.md" -print | while read REA
   TRACK2_COMMAND="autorest --typescript --track2 --license-header=MICROSOFT_MIT_NO_VERSION --typescript-sdks-folder=$SDK_PATH $README_PATH"
 
   README_FPATH=$(dirname $README_PATH)
-  SRCPATH=$(cat $README_FPATH/readme.typescript.md | grep '^\s*output-folder:' | sed "s/output-folder://" | xargs dirname)
-  SERVICE_NAME=$(dirname $SRCPATH | xargs basename)
-  TARGET_PATH="$SDK_PATH/sdk/maps/$SERVICE_NAME" 
+  SRCPATH=$(cat $README_FPATH/readme.typescript.md | grep '^\s*output-folder:' | sed "s/output-folder://")
+  SERVICE_NAME=$(basename $SRCPATH | tr -d \")
+  TARGET_PATH="$SDK_PATH/sdk/maps/$SERVICE_NAME/" 
 
   echo $TRACK2_COMMAND
   eval $TRACK2_COMMAND
@@ -35,10 +35,12 @@ find specification/maps/data-plane/*/* -name "readme.md" -print | while read REA
     | del(."//sampleConfiguration")
     + {module: "dist-esm/index.js", types: "types/'"${SERVICE_NAME,,}"'.d.ts"}
     | .dependencies += { 
+      "@azure/core-client": "^1.0.0",
       "@azure/core-paging": "^1.1.1",
-      "@azure/core-lro": "^1.0.2",
+      "@azure/core-lro": "^2.2.2",
       "@azure/abort-controller": "^1.0.0",
       "@azure/core-asynciterator-polyfill": "^1.0.0",
+      "@azure/core-rest-pipeline": "^1.1.0",
     }
     | .files = ["dist/", "dist-esm/", "types/'"${SERVICE_NAME,,}"'.d.ts"]
     | .scripts."build:types" = "downlevel-dts types types/3.1"
@@ -74,17 +76,13 @@ done
 
 cd $SDK_PATH
 rush update 
+rush build
 
 find sdk/maps/maps-*/ -maxdepth 1 -name "package.json" -print | while read PACKAGEJSON_PATH ; do 
   TARGET_PATH="$(dirname $PACKAGEJSON_PATH)"
   RP=$(pwd)
   cd $TARGET_PATH
   
-  #FIXME: circumvent @azure/core-lro not building at 1.0.2??? manual build in ./node_modules...
-  cd ./node_modules/@azure/core-lro/
-  rushx build
-  cd -
-
   rushx build
   rushx pack
   cd $RP
