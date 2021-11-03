@@ -104,3 +104,7 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+# Swift
+
+See configuration in [readme.swift.md](./readme.swift.md)
